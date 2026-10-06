@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<header><h1>Produtos Cadastrados</h1></header>
+<nav th:replace="~{fragmentos :: menu}"></nav>
+
+<main>
+    <p th:if="${#lists.isEmpty(produtos)}">Nenhum produto cadastrado.</p>
+
+    <table th:unless="${#lists.isEmpty(produtos)}">
+        <tr>
+            <th>Logo</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th sec:authorize="hasRole('ADMIN')">Ações</th>
+        </tr>
+        <tr th:each="produto : ${produtos}">
+            <td><img th:if="${produto.logo}" th:src="@{/uploads/{arq}(arq=${produto.logo})}" th:alt="${produto.nome}"></td>
+            <td th:text="${produto.nome}"></td>
+            <td th:text="${produto.descricao}"></td>
+            <td sec:authorize="hasRole('ADMIN')">
+                <form th:action="@{/excluirProduto/{id}(id=${produto.id})}" method="post"
+                      onsubmit="return confirm('Excluir este produto?');">
+                    <button type="submit" class="botao botao-perigo">Excluir</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</main>
+
+<footer>&copy; 2025 Sistema de Cadastro de Produtos de Tecnologia</footer>
+</body>
+</html>

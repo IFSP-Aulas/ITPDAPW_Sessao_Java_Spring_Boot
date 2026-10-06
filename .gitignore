@@ -1,0 +1,21 @@
+# Build do Maven
+target/
+
+# Arquivos enviados pelos usuários (logos dos produtos)
+uploads/
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.factorypath
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

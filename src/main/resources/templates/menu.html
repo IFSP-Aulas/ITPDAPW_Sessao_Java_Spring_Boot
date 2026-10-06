@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<header><h1>Sistema de Cadastro de Produtos</h1></header>
+<nav th:replace="~{fragmentos :: menu}"></nav>
+
+<main>
+    <h2>Bem-vindo(a), <span sec:authentication="name"></span>!</h2>
+
+    <p>Perfis: <strong sec:authentication="principal.authorities"></strong></p>
+    <p sec:authorize="hasRole('ADMIN')">Você é administrador e pode excluir produtos.</p>
+
+    <h3>Dados da sessão</h3>
+    <table>
+        <tr><th>ID da sessão</th><td th:text="${sessaoId}"></td></tr>
+        <tr><th>Criada em</th><td th:text="${#dates.format(sessaoCriada, 'dd/MM/yyyy HH:mm:ss')}"></td></tr>
+        <tr><th>Expira após inatividade de</th><td th:text="${sessaoTimeout} + ' minutos'"></td></tr>
+    </table>
+</main>
+
+<footer>&copy; 2025 Sistema de Cadastro de Produtos de Tecnologia</footer>
+</body>
+</html>

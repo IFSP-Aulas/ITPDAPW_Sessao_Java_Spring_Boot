@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<!-- Menu de navegação reaproveitado nas páginas protegidas -->
+<nav th:fragment="menu">
+    <a th:href="@{/menu}">Menu</a>
+    <a th:href="@{/formCadastrarProduto}">Cadastrar Produto</a>
+    <a th:href="@{/listarProdutos}">Listar Produtos</a>
+    <form th:action="@{/logout}" method="post" style="display:inline">
+        <button type="submit">Sair (<span sec:authentication="name"></span>)</button>
+    </form>
+</nav>
+</body>
+</html>
